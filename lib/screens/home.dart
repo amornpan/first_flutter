@@ -6,8 +6,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //Explicit
+
+  //Method
+  Widget showAppName() {
+    return Text('Flutter App');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Text('This is Home');
+    return Scaffold(
+      body: Column(mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          showAppName(),
+          showAppName(),
+        ],
+      ),
+    );
   }
 }
