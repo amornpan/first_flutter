@@ -9,8 +9,28 @@ class _HomeState extends State<Home> {
   //Explicit
 
   //Method
+
+  Widget signInButton() {
+    return Expanded(
+          child: RaisedButton(
+        child: Text('Sign In'),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget showButton() {
+    return Container( color: Colors.grey,
+      margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
+      child: Row(
+        children: <Widget>[signInButton(), signInButton()],
+      ),
+    );
+  }
+
   Widget showLogo() {
-    return Container(alignment: Alignment.center,
+    return Container(
+      alignment: Alignment.center,
       child: Container(
         width: 150.0,
         height: 150,
@@ -20,7 +40,16 @@ class _HomeState extends State<Home> {
   }
 
   Widget showAppName() {
-    return Text('Flutter App');
+    return Text(
+      'Flutter App',
+      style: TextStyle(
+        fontSize: 35.0,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        color: Colors.blue[700],
+        fontFamily: 'DancingScript',
+      ),
+    );
   }
 
   @override
@@ -29,8 +58,9 @@ class _HomeState extends State<Home> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          showAppName(),
           showLogo(),
+          showAppName(),
+          showButton(),
         ],
       ),
     );
