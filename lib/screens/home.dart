@@ -10,20 +10,41 @@ class _HomeState extends State<Home> {
 
   //Method
 
+  Widget mySizebox() {
+    return SizedBox(
+      width: 5.0,
+      height: 5.0,
+    );
+  }
+
+  Widget signUpButton() {
+    return Expanded(
+      child: OutlineButton(
+        child: Text('Sign Up', style: TextStyle(color: Colors.blue.shade700)),
+        onPressed: () {},
+      ),
+    );
+  }
+
   Widget signInButton() {
     return Expanded(
-          child: RaisedButton(
-        child: Text('Sign In'),
+      child: RaisedButton(
+        color: Colors.blue.shade400,
+        child: Text(
+          'Sign In',
+          style: TextStyle(color: Colors.white),
+        ),
         onPressed: () {},
       ),
     );
   }
 
   Widget showButton() {
-    return Container( color: Colors.grey,
-      margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
+    //return Container( color: Colors.grey,
+    return Container(
+      margin: EdgeInsets.only(left: 50.0, right: 50.0),
       child: Row(
-        children: <Widget>[signInButton(), signInButton()],
+        children: <Widget>[signInButton(), mySizebox(), signUpButton()],
       ),
     );
   }
@@ -55,13 +76,22 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          showLogo(),
-          showAppName(),
-          showButton(),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+          colors: [Colors.white, Colors.blue],
+          radius: 1.0,
+        )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            showLogo(),
+            mySizebox(),
+            showAppName(),
+            mySizebox(),
+            showButton(),
+          ],
+        ),
       ),
     );
   }
