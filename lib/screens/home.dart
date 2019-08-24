@@ -9,8 +9,14 @@ class _HomeState extends State<Home> {
   //Explicit
 
   //Method
-  Widget showLogo(){
-    return Image.asset('images/logo.png');
+  Widget showLogo() {
+    return Container(alignment: Alignment.center,
+      child: Container(
+        width: 150.0,
+        height: 150,
+        child: Image.asset('images/logo.png'),
+      ),
+    );
   }
 
   Widget showAppName() {
@@ -20,10 +26,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          showLogo(),
           showAppName(),
+          showLogo(),
         ],
       ),
     );
