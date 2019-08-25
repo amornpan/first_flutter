@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_flutter/screens/my_service.dart';
 import 'package:first_flutter/screens/register.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +10,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //Explicit
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   //Method
+
+  @override
+  void initState() {
+    super.initState();
+    checkStatus();
+  }
+
+  Future<void> checkStatus() async {
+    FirebaseUser firebaseUser = await firebaseAuth.currentUser();
+
+    if (firebaseUser != null) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
+    }
+  }
 
   Widget mySizebox() {
     return SizedBox(
@@ -59,8 +79,8 @@ class _HomeState extends State<Home> {
     return Container(
       alignment: Alignment.center,
       child: Container(
-        width: 150.0,
-        height: 150,
+        width: 200.0,
+        height: 200.0,
         child: Image.asset('images/logo.png'),
       ),
     );
@@ -71,7 +91,7 @@ class _HomeState extends State<Home> {
       //'ระบบประเมินความพึงพอใจ',
       'Customer Satisfaction',
       style: TextStyle(
-        fontSize: 25.0,
+        fontSize: 35.0,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
         color: Colors.blue[700],

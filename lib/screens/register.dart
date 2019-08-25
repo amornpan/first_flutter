@@ -128,11 +128,10 @@ class _RegisterState extends State<Register> {
       userUpdateInfo.displayName = nameString;
       response.updateProfile(userUpdateInfo);
 
-
       MaterialPageRoute materialPageRoute =
-              MaterialPageRoute(builder: (BuildContext context) => MyService());
-      Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic> route) => false);
-
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
     });
   }
 
