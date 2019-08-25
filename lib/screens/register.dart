@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -33,7 +34,8 @@ class _RegisterState extends State<Register> {
         if (value.isEmpty) {
           return 'Please Fill Name in Blank';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         nameString = value;
       },
     );
@@ -52,12 +54,13 @@ class _RegisterState extends State<Register> {
           labelStyle: TextStyle(color: blueColor),
           helperText: 'Type Your Email',
           helperStyle: TextStyle(color: blueColor),
-          hintText: 'English Only'),
+          hintText: 'you@email.com'),
       validator: (String value) {
         if (!((value.contains('@')) && (value.contains('.')))) {
           return 'Please Type Valid Email-Address Format';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         emailString = value;
       },
     );
@@ -80,7 +83,8 @@ class _RegisterState extends State<Register> {
         if (value.length < 6) {
           return 'Password must more than 6 character';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         passwordString = value;
       },
     );
@@ -92,7 +96,8 @@ class _RegisterState extends State<Register> {
       onPressed: () {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('name = $nameString, email = $emailString, password = $passwordString');
+          print(
+              'name = $nameString, email = $emailString, password = $passwordString');
         }
       },
     );
