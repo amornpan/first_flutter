@@ -9,10 +9,13 @@ class _RegisterState extends State<Register> {
   //Explicit
   Color greenColor = Colors.green.shade600;
   Color blueColor = Colors.blue.shade600;
-  Color pinkColor = Colors.pink.shade600;
+  Color pinkColor = Colors.pink.shade300;
+
+  final formKey = GlobalKey<FormState>();
+
+  String nameString, emailString, passwordString;
 
   //Method
-
   Widget nameText() {
     return TextFormField(
       decoration: InputDecoration(
@@ -21,23 +24,42 @@ class _RegisterState extends State<Register> {
             size: 36.0,
             color: greenColor,
           ),
-          labelText: 'Name : ', labelStyle: TextStyle(color: greenColor),
-          helperText: 'Type Your Name', helperStyle: TextStyle(color: greenColor),
+          labelText: 'Name : ',
+          labelStyle: TextStyle(color: greenColor),
+          helperText: 'Type Your Name',
+          helperStyle: TextStyle(color: greenColor),
           hintText: 'English Only'),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Please Fill Name in Blank';
+        }
+      },onSaved: (String value){
+        nameString = value;
+      },
     );
   }
 
   Widget emailText() {
     return TextFormField(
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
           icon: Icon(
             Icons.email,
             size: 36.0,
             color: blueColor,
           ),
-          labelText: 'Email : ', labelStyle: TextStyle(color: blueColor),
-          helperText: 'Type Your Email', helperStyle: TextStyle(color: blueColor),
+          labelText: 'Email : ',
+          labelStyle: TextStyle(color: blueColor),
+          helperText: 'Type Your Email',
+          helperStyle: TextStyle(color: blueColor),
           hintText: 'English Only'),
+      validator: (String value) {
+        if (!((value.contains('@')) && (value.contains('.')))) {
+          return 'Please Type Valid Email-Address Format';
+        }
+      },onSaved: (String value){
+        emailString = value;
+      },
     );
   }
 
@@ -49,16 +71,30 @@ class _RegisterState extends State<Register> {
             size: 36.0,
             color: pinkColor,
           ),
-          labelText: 'Password : ', labelStyle: TextStyle(color: pinkColor),
-          helperText: 'Type Your Password', helperStyle: TextStyle(color: pinkColor),
+          labelText: 'Password : ',
+          labelStyle: TextStyle(color: pinkColor),
+          helperText: 'Type Your Password',
+          helperStyle: TextStyle(color: pinkColor),
           hintText: 'More 6 Charactor'),
+      validator: (String value) {
+        if (value.length < 6) {
+          return 'Password must more than 6 character';
+        }
+      },onSaved: (String value){
+        passwordString = value;
+      },
     );
   }
 
   Widget registerButton() {
     return IconButton(
       icon: Icon(Icons.cloud_upload),
-      onPressed: () {},
+      onPressed: () {
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+          print('name = $nameString, email = $emailString, password = $passwordString');
+        }
+      },
     );
   }
 
@@ -70,13 +106,16 @@ class _RegisterState extends State<Register> {
         title: Text('ลงทะเบียน'),
         actions: <Widget>[registerButton()],
       ),
-      body: ListView(
-        padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 70.0),
-        children: <Widget>[
-          nameText(),
-          emailText(),
-          passwordText(),
-        ],
+      body: Form(
+        key: formKey,
+        child: ListView(
+          padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 70.0),
+          children: <Widget>[
+            nameText(),
+            emailText(),
+            passwordText(),
+          ],
+        ),
       ),
     );
   }
