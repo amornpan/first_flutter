@@ -1,3 +1,4 @@
+import 'package:first_flutter/screens/register.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -21,7 +22,12 @@ class _HomeState extends State<Home> {
     return Expanded(
       child: OutlineButton(
         child: Text('Sign Up', style: TextStyle(color: Colors.blue.shade700)),
-        onPressed: () {},
+        onPressed: () {
+          print('You Click SignUp Button');
+          MaterialPageRoute materialPageRoute =
+              MaterialPageRoute(builder: (BuildContext context) => Register());
+          Navigator.of(context).push(materialPageRoute);
+        },
       ),
     );
   }
