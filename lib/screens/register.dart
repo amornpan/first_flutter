@@ -111,11 +111,25 @@ class _RegisterState extends State<Register> {
         .createUserWithEmailAndPassword(
             email: emailString, password: passwordString)
         .then((response) {
-          print('Success Register');
-        })
-        .catchError((response) {
-          print('response value = ${response.toString()}');
-        });
+      print('Success Register');
+    }).catchError((response) {
+      print('response value = ${response.toString()}');
+      String title = response.code;
+      String message = response.message;
+      myAlert(title, message);
+    });
+  }
+
+  void myAlert(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+        );
+      },
+    );
   }
 
   @override
