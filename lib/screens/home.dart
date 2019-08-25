@@ -12,8 +12,8 @@ class _HomeState extends State<Home> {
 
   Widget mySizebox() {
     return SizedBox(
-      width: 5.0,
-      height: 5.0,
+      width: 10.0,
+      height: 15.0,
     );
   }
 
@@ -62,9 +62,10 @@ class _HomeState extends State<Home> {
 
   Widget showAppName() {
     return Text(
-      'Flutter App',
+      //'ระบบประเมินความพึงพอใจ',
+      'Customer Satisfaction',
       style: TextStyle(
-        fontSize: 35.0,
+        fontSize: 25.0,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
         color: Colors.blue[700],
@@ -80,14 +81,14 @@ class _HomeState extends State<Home> {
         decoration: BoxDecoration(
             gradient: RadialGradient(
           colors: [Colors.white, Colors.blue],
-          radius: 1.0,
+          radius: 1.2,
         )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            showLogo(),
-            mySizebox(),
             showAppName(),
+            mySizebox(),
+            showLogo(),
             mySizebox(),
             showButton(),
           ],
