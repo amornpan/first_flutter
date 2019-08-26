@@ -36,10 +36,25 @@ class _MyServiceState extends State<MyService> {
     );
   }
 
+  Widget mapMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.map,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'Show Map',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show Current Location Map'),
+    );
+  }
+
   Widget signOutMenu() {
     return ListTile(
       leading: Icon(
-        Icons.cached,
+        //Icons.cached,
+        Icons.exit_to_app,
         size: mySizeIcon,
       ),
       title: Text(
@@ -98,6 +113,7 @@ class _MyServiceState extends State<MyService> {
         children: <Widget>[
           myHeadDrawer(),
           listProductMenu(),
+          mapMenu(),
           signOutMenu(),
         ],
       ),
