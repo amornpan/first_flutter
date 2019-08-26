@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_flutter/screens/home.dart';
+import 'package:first_flutter/screens/list_product.dart';
 import 'package:flutter/material.dart';
 
 class MyService extends StatefulWidget {
@@ -13,6 +14,7 @@ class _MyServiceState extends State<MyService> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   double mySizeIcon = 36.0;
   double h2 = 18.0;
+  Widget myWidget = ListProduct();
 
 //Method
 
@@ -142,7 +144,7 @@ class _MyServiceState extends State<MyService> {
       appBar: AppBar(
         title: Text('My Service'),
       ),
-      body: Text('Body'),
+      body: myWidget,
       drawer: myDrawerMenu(),
     );
   }
