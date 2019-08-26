@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_flutter/screens/home.dart';
 import 'package:first_flutter/screens/list_product.dart';
+import 'package:first_flutter/screens/show_map.dart';
 import 'package:flutter/material.dart';
 
 class MyService extends StatefulWidget {
@@ -15,6 +16,7 @@ class _MyServiceState extends State<MyService> {
   double mySizeIcon = 36.0;
   double h2 = 18.0;
   Widget myWidget = ListProduct();
+  Widget myMap = ShowMap();
 
 //Method
 
@@ -35,6 +37,12 @@ class _MyServiceState extends State<MyService> {
         style: TextStyle(fontSize: h2),
       ),
       subtitle: Text('Show List All of Product'),
+      onTap: (() {
+        setState(() {
+          myWidget = ListProduct();
+          Navigator.of(context).pop();
+        });
+      }),
     );
   }
 
@@ -49,6 +57,12 @@ class _MyServiceState extends State<MyService> {
         style: TextStyle(fontSize: h2),
       ),
       subtitle: Text('Show Current Location Map'),
+      onTap: (() {
+        setState(() {
+          myWidget = ShowMap();
+          Navigator.of(context).pop();
+        });
+      }),
     );
   }
 
