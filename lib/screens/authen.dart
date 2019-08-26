@@ -6,13 +6,29 @@ class Authentication extends StatefulWidget {
 }
 
 class _AuthenticationState extends State<Authentication> {
+  //Explicit
+  Color greenColor = Colors.green.shade900;
+
+  //Method
+  Widget backButton() {
+    return IconButton(
+      icon: Icon(
+        Icons.navigate_before,
+        color: greenColor,
+        size: 36.0,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('เข้าสู่ระบบ'),
-      ),
-      body: Text('Authentication Body'),
+      // appBar: AppBar(
+      //   title: Text('เข้าสู่ระบบ'),
+      // ),
+      //body: SafeArea(child: Text('Authentication Body')),
+
+      body: SafeArea(child: Stack(children: <Widget>[backButton()],),)
     );
   }
 }

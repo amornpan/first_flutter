@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   Widget mySizebox() {
     return SizedBox(
       width: 10.0,
-      height: 15.0,
+      height: 55.0,
     );
   }
 
