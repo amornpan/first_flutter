@@ -22,7 +22,19 @@ class _MyServiceState extends State<MyService> {
     findDisplayName();
   }
 
-  
+  Widget listProductMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.home,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'List Products',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show List All of Product'),
+    );
+  }
 
   Widget signOutMenu() {
     return ListTile(
@@ -85,6 +97,7 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
+          listProductMenu(),
           signOutMenu(),
         ],
       ),
