@@ -53,10 +53,17 @@ class _AuthenticationState extends State<Authentication> {
 
   Widget showAuthen() {
     return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('images/bicycle_wallpaper.jpg'),
+              fit: BoxFit.fill)),
       alignment: Alignment.center,
       child: Container(
+        padding: EdgeInsets.all(50.0),
+        color: Color.fromRGBO(255, 255, 255, 0.5),
         width: 400.0,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             showName(),
@@ -92,8 +99,8 @@ class _AuthenticationState extends State<Authentication> {
         body: SafeArea(
       child: Stack(
         children: <Widget>[
-          backButton(),
           showAuthen(),
+          backButton(),
         ],
       ),
     ));

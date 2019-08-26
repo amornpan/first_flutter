@@ -45,6 +45,7 @@ flutter:
   assets:
    - images/logo.png
    - images/mountains.jpg
+   - images/bicycle_wallpaper.jpg
   #  - images/a_dot_ham.jpeg
   
 
