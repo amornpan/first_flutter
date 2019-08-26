@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_flutter/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class MyService extends StatefulWidget {
@@ -23,7 +24,19 @@ class _MyServiceState extends State<MyService> {
     return ListTile(
       leading: Icon(Icons.exit_to_app),
       title: Text('Sign Out'),
+      onTap: () {
+        processSignOut();
+      },
     );
+  }
+
+  Future<void> processSignOut() async {
+    await firebaseAuth.signOut().then((response) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => Home());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
+    });
   }
 
   Future<void> findDisplayName() async {
@@ -68,6 +81,7 @@ class _MyServiceState extends State<MyService> {
     );
   }
 
+  // Show Menu Item
   Widget myHeadDrawer() {
     return DrawerHeader(
       decoration: BoxDecoration(
