@@ -19,6 +19,13 @@ class _MyServiceState extends State<MyService> {
     findDisplayName();
   }
 
+  Widget signOutMenu() {
+    return ListTile(
+      leading: Icon(Icons.exit_to_app),
+      title: Text('Sign Out'),
+    );
+  }
+
   Future<void> findDisplayName() async {
     FirebaseUser firebaseUser = await firebaseAuth.currentUser();
     setState(() {
@@ -55,6 +62,7 @@ class _MyServiceState extends State<MyService> {
       child: ListView(
         children: <Widget>[
           myHeadDrawer(),
+          signOutMenu(),
         ],
       ),
     );
