@@ -10,10 +10,31 @@ class _AuthenticationState extends State<Authentication> {
   Color greenColor = Colors.green.shade900;
 
   //Method
-  Widget emailText(){
-    return TextField();
+  Widget emailText() {
+    return TextField(
+      decoration: InputDecoration(
+          icon: Icon(
+            Icons.email,
+            size: 36.0,
+            color: greenColor,
+          ),
+          labelText: 'Email :',
+          labelStyle: TextStyle(color: greenColor)),
+    );
   }
 
+  Widget passwordText() {
+    return TextField(
+      decoration: InputDecoration(
+          icon: Icon(
+            Icons.lock,
+            size: 36.0,
+            color: greenColor,
+          ),
+          labelText: 'Password :',
+          labelStyle: TextStyle(color: greenColor)),
+    );
+  }
 
   Widget showName() {
     return ListTile(
@@ -25,17 +46,23 @@ class _AuthenticationState extends State<Authentication> {
       title: Text(
         'Amornpan Phornchaicharoen',
         style: TextStyle(
-            fontSize: 30.0, color: greenColor, fontFamily: 'DancingScript'),
+            fontSize: 25.0, color: greenColor, fontFamily: 'DancingScript'),
       ),
     );
   }
 
   Widget showAuthen() {
-    return Container(alignment: Alignment.center,
-          child: Container(width: 350.0,
+    return Container(
+      alignment: Alignment.center,
+      child: Container(
+        width: 400.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[showName(),emailText(),],
+          children: <Widget>[
+            showName(),
+            emailText(),
+            passwordText(),
+          ],
         ),
       ),
     );
