@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Authentication extends StatefulWidget {
@@ -9,40 +10,65 @@ class _AuthenticationState extends State<Authentication> {
   //Explicit
   Color greenColor = Colors.green.shade900;
 
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  String email = '', password = '';
+
+  final fromKey = GlobalKey<FormState>();
+
   //Method
   Widget LoginButton() {
     return FloatingActionButton(
-      child: Icon(Icons.navigate_next),onPressed: (){
-
+      backgroundColor: greenColor,
+      child: Icon(
+        Icons.navigate_next,
+        size: 36.0,
+      ),
+      onPressed: () {
+        fromKey.currentState.save();
+        print('email=$email, password=$password');
+        checkAuthen();
       },
     );
   }
 
+  Future<void> checkAuthen() async {
+    await firebaseAuth.signInWithEmailAndPassword();
+  }
+
   Widget emailText() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.email,
-            size: 36.0,
-            color: greenColor,
-          ),
-          labelText: 'Email :',
-          labelStyle: TextStyle(color: greenColor)),
+        icon: Icon(
+          Icons.email,
+          size: 36.0,
+          color: greenColor,
+        ),
+        labelText: 'Email :',
+        labelStyle: TextStyle(color: greenColor),
+      ),
+      onSaved: (String value) {
+        email = value;
+      },
     );
   }
 
   Widget passwordText() {
-    return TextField(
+    return TextFormField(
       obscureText: true,
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.lock,
-            size: 36.0,
-            color: greenColor,
-          ),
-          labelText: 'Password :',
-          labelStyle: TextStyle(color: greenColor)),
+        icon: Icon(
+          Icons.lock,
+          size: 36.0,
+          color: greenColor,
+        ),
+        labelText: 'Password :',
+        labelStyle: TextStyle(color: greenColor),
+      ),
+      onSaved: (String value) {
+        password = value;
+      },
     );
   }
 
@@ -72,14 +98,17 @@ class _AuthenticationState extends State<Authentication> {
         padding: EdgeInsets.all(50.0),
         color: Color.fromRGBO(255, 255, 255, 0.5),
         width: 400.0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            showName(),
-            emailText(),
-            passwordText(),
-          ],
+        child: Form(
+          key: fromKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              showName(),
+              emailText(),
+              passwordText(),
+            ],
+          ),
         ),
       ),
     );
@@ -101,18 +130,20 @@ class _AuthenticationState extends State<Authentication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text('เข้าสู่ระบบ'),
-        // ),
-        //body: SafeArea(child: Text('Authentication Body')),
+      // appBar: AppBar(
+      //   title: Text('เข้าสู่ระบบ'),
+      // ),
+      //body: SafeArea(child: Text('Authentication Body')),
 
-        body: SafeArea(
-      child: Stack(
-        children: <Widget>[
-          showAuthen(),
-          backButton(),
-        ],
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            showAuthen(),
+            backButton(),
+          ],
+        ),
       ),
-    ),floatingActionButton: LoginButton(),);
+      floatingActionButton: LoginButton(),
+    );
   }
 }
