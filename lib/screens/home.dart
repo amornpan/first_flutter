@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_flutter/screens/authen.dart';
 import 'package:first_flutter/screens/my_service.dart';
 import 'package:first_flutter/screens/register.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,12 @@ class _HomeState extends State<Home> {
           'Sign In',
           style: TextStyle(color: Colors.white),
         ),
-        onPressed: () {},
+        onPressed: () {
+          print('You Click SignIn Button');
+          MaterialPageRoute materialPageRoute = MaterialPageRoute(
+              builder: (BuildContext context) => Authentication());
+          Navigator.of(context).push(materialPageRoute);
+        },
       ),
     );
   }

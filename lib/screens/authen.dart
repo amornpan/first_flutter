@@ -8,8 +8,11 @@ class Authentication extends StatefulWidget {
 class _AuthenticationState extends State<Authentication> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('เข้าสู่ระบบ'),
+      ),
+      body: Text('Authentication Body'),
     );
   }
 }
