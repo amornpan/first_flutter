@@ -11,6 +11,8 @@ class _MyServiceState extends State<MyService> {
 //Explicit
   String loginString = '';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  double mySizeIcon = 36.0;
+  double h2 = 18.0;
 
 //Method
 
@@ -20,10 +22,18 @@ class _MyServiceState extends State<MyService> {
     findDisplayName();
   }
 
+  
+
   Widget signOutMenu() {
     return ListTile(
-      leading: Icon(Icons.exit_to_app),
-      title: Text('Sign Out'),
+      leading: Icon(
+        Icons.cached,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'Sign Out',
+        style: TextStyle(fontSize: h2),
+      ),
       onTap: () {
         processSignOut();
       },
