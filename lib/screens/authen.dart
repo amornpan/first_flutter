@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_flutter/screens/my_service.dart';
 import 'package:flutter/material.dart';
 
 class Authentication extends StatefulWidget {
@@ -33,7 +34,14 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   Future<void> checkAuthen() async {
-    await firebaseAuth.signInWithEmailAndPassword();
+    await firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((response) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
+    });
   }
 
   Widget emailText() {
