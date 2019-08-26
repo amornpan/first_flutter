@@ -12,6 +12,7 @@ class _AuthenticationState extends State<Authentication> {
   //Method
   Widget emailText() {
     return TextField(
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
           icon: Icon(
             Icons.email,
@@ -24,7 +25,7 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   Widget passwordText() {
-    return TextField(
+    return TextField(obscureText: true,
       decoration: InputDecoration(
           icon: Icon(
             Icons.lock,
@@ -44,7 +45,7 @@ class _AuthenticationState extends State<Authentication> {
         color: greenColor,
       ),
       title: Text(
-        'Amornpan Phornchaicharoen',
+        'Sign In:',
         style: TextStyle(
             fontSize: 25.0, color: greenColor, fontFamily: 'DancingScript'),
       ),
