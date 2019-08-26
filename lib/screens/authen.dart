@@ -41,7 +41,23 @@ class _AuthenticationState extends State<Authentication> {
           MaterialPageRoute(builder: (BuildContext context) => MyService());
       Navigator.of(context).pushAndRemoveUntil(
           materialPageRoute, (Route<dynamic> route) => false);
+    }).catchError((response) {
+      String title = response.code;
+      String message = response.message;
+      myAlert(title, message);
     });
+  }
+
+  void myAlert(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+        );
+      },
+    );
   }
 
   Widget emailText() {
