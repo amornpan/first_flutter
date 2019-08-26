@@ -10,6 +10,11 @@ class _AuthenticationState extends State<Authentication> {
   Color greenColor = Colors.green.shade900;
 
   //Method
+  Widget emailText(){
+    return TextField();
+  }
+
+
   Widget showName() {
     return ListTile(
       leading: ImageIcon(
@@ -26,9 +31,13 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   Widget showAuthen() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[showName()],
+    return Container(alignment: Alignment.center,
+          child: Container(width: 350.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[showName(),emailText(),],
+        ),
+      ),
     );
   }
 
