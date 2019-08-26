@@ -53,10 +53,34 @@ class _AuthenticationState extends State<Authentication> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(title),
+          title: showTitle(title),
           content: Text(message),
+          actions: <Widget>[okButton()],
         );
       },
+    );
+  }
+
+  Widget okButton() {
+    return FlatButton(
+      child: Text('OK'),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  Widget showTitle(String title) {
+    return ListTile(
+      leading: Icon(
+        Icons.add_alert,
+        color: Colors.red,
+        size: 48.0,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.red),
+      ),
     );
   }
 
