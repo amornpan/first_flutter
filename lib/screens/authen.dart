@@ -10,6 +10,14 @@ class _AuthenticationState extends State<Authentication> {
   Color greenColor = Colors.green.shade900;
 
   //Method
+  Widget LoginButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.navigate_next),onPressed: (){
+
+      },
+    );
+  }
+
   Widget emailText() {
     return TextField(
       keyboardType: TextInputType.emailAddress,
@@ -25,7 +33,8 @@ class _AuthenticationState extends State<Authentication> {
   }
 
   Widget passwordText() {
-    return TextField(obscureText: true,
+    return TextField(
+      obscureText: true,
       decoration: InputDecoration(
           icon: Icon(
             Icons.lock,
@@ -104,6 +113,6 @@ class _AuthenticationState extends State<Authentication> {
           backButton(),
         ],
       ),
-    ));
+    ),floatingActionButton: LoginButton(),);
   }
 }
