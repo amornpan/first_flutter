@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:first_flutter/models/product_model.dart';
+import 'package:first_flutter/screens/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -101,17 +102,27 @@ class _ListProductState extends State<ListProduct> {
         int index,
       ) {
         //return Text(productModels[index].name);
-        return Container(
-          padding: EdgeInsets.all(10.0),
-          decoration: index % 2 == 0
-              ? BoxDecoration(color: Colors.blue.shade200)
-              : BoxDecoration(color: Colors.blue.shade400),
-          child: Row(
-            children: <Widget>[
-              showImage(index),
-              showText(index),
-            ],
+        return GestureDetector(
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            decoration: index % 2 == 0
+                ? BoxDecoration(color: Colors.blue.shade200)
+                : BoxDecoration(color: Colors.blue.shade400),
+            child: Row(
+              children: <Widget>[
+                showImage(index),
+                showText(index),
+              ],
+            ),
           ),
+          onTap: () {
+            print('You Click index =$index');
+            MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                builder: (BuildContext context) => Detail(
+                      productModel: productModels[index],
+                    ));
+            Navigator.of(context).push(materialPageRoute);
+          },
         );
       },
     );
