@@ -1,4 +1,3 @@
-import 'package:first_flutter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -16,11 +15,24 @@ class _ShowMapState extends State<ShowMap> {
   );
 
   //Method
+  Set<Marker> myMarker() {
+    return <Marker>[
+      Marker(
+          position: totinnovate_LatLng,
+          markerId: MarkerId('TOTInnovation'),
+          infoWindow: InfoWindow(
+              title: 'สถาบันนวัตกรรมทีโอที', snippet: 'TOT Innovation Institute'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(60.0)),
+    ].toSet();
+  }
+
   myShowMap() {
     return GoogleMap(
+      myLocationEnabled: true,
       mapType: MapType.normal,
       initialCameraPosition: cameraPosition,
       onMapCreated: (GoogleMapController googleMapController) {},
+      markers: myMarker(),
     );
   }
 
