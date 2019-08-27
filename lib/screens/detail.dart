@@ -27,13 +27,36 @@ class _DetailState extends State<Detail> {
     return Text('Detail of ${myProductModel.name}');
   }
 
+  Widget showListProduct() {
+    return ListView(
+      children: <Widget>[showImage(), showDetail()],
+    );
+  }
+
+  Widget showImage() {
+    return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.all(16.0),
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Image.network(
+        myProductModel.path,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
+  Widget showDetail() {
+    return Container( padding: EdgeInsets.all(20.0),
+      child: Text(myProductModel.detail));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: showName(),
       ),
-      body: Text('Body'),
+      body: showListProduct(),
     );
   }
 }
