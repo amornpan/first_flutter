@@ -3,6 +3,7 @@ import 'package:first_flutter/screens/home.dart';
 import 'package:first_flutter/screens/list_product.dart';
 import 'package:first_flutter/screens/show_map.dart';
 import 'package:flutter/material.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 class MyService extends StatefulWidget {
   @override
@@ -24,6 +25,14 @@ class _MyServiceState extends State<MyService> {
   void initState() {
     super.initState();
     findDisplayName();
+  }
+
+  Future<void> scanQRcode()async{
+    try {
+      String barCode = await BarcodeScanner.scan();
+      print('barcode $barCode');
+    } catch (e) {
+    }
   }
 
   Widget listProductMenu() {
@@ -103,7 +112,7 @@ class _MyServiceState extends State<MyService> {
   Widget showLogin() {
     return Text(
       'Login by ... $loginString',
-      style: TextStyle(fontSize: 12.0),
+      style: TextStyle(fontSize: 13.0,color: Colors.white),
     );
   }
 
@@ -129,10 +138,29 @@ class _MyServiceState extends State<MyService> {
         children: <Widget>[
           myHeadDrawer(),
           listProductMenu(),
+          qrCodeMenu(),
           mapMenu(),
           signOutMenu(),
         ],
       ),
+    );
+  }
+
+  Widget qrCodeMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.camera,
+        size: mySizeIcon,
+      ),
+      title: Text(
+        'Read QR Code',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('For Read QR code by Camera'),
+      trailing: Icon(Icons.navigate_next),onTap: (){
+        scanQRcode();
+        Navigator.of(context).pop();
+      },
     );
   }
 
