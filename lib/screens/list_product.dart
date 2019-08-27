@@ -46,6 +46,16 @@ class _ListProductState extends State<ListProduct> {
     });
   }
 
+  Widget showImage(int index) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Image.network(
+        productModels[index].path,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
   Widget showListViewProduct() {
     return ListView.builder(
       itemCount: productModels.length,
@@ -53,7 +63,10 @@ class _ListProductState extends State<ListProduct> {
         BuildContext context,
         int index,
       ) {
-        return Text(productModels[index].name);
+        //return Text(productModels[index].name);
+        return Row(
+          children: <Widget>[showImage(index)],
+        );
       },
     );
   }
