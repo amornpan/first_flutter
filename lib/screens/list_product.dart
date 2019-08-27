@@ -46,8 +46,33 @@ class _ListProductState extends State<ListProduct> {
     });
   }
 
+  Widget showDetail(int index){
+    String detail = productModels[index].detail;
+    detail = detail.substring(1,100);
+    detail = '$detail ...';
+    return Text(detail);
+  }
+
+  Widget showName(int index) {
+    return Text(
+      productModels[index].name,
+      style: TextStyle(fontSize: 30.0, color: Colors.purple.shade600),
+    );
+  }
+
+  Widget showText(int index) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Column(
+        children: <Widget>[showName(index),showDetail(index),],
+      ),
+    );
+  }
+
   Widget showImage(int index) {
     return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.all(16.0),
       width: MediaQuery.of(context).size.width * 0.5,
       child: Image.network(
         productModels[index].path,
@@ -65,7 +90,7 @@ class _ListProductState extends State<ListProduct> {
       ) {
         //return Text(productModels[index].name);
         return Row(
-          children: <Widget>[showImage(index)],
+          children: <Widget>[showImage(index), showText(index),],
         );
       },
     );
