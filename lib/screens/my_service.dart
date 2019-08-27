@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:first_flutter/models/product_model.dart';
+import 'package:first_flutter/screens/detail.dart';
 import 'package:first_flutter/screens/home.dart';
 import 'package:first_flutter/screens/list_product.dart';
 import 'package:first_flutter/screens/show_map.dart';
@@ -18,6 +23,7 @@ class _MyServiceState extends State<MyService> {
   double h2 = 18.0;
   Widget myWidget = ListProduct();
   Widget myMap = ShowMap();
+  List<ProductModel> productModels = [];
 
 //Method
 
@@ -25,14 +31,46 @@ class _MyServiceState extends State<MyService> {
   void initState() {
     super.initState();
     findDisplayName();
+    readAlldata();
   }
 
-  Future<void> scanQRcode()async{
+  Future<void> scanQRcode() async {
     try {
       String barCode = await BarcodeScanner.scan();
       print('barcode $barCode');
-    } catch (e) {
-    }
+      if (productModels.length != 0) {
+        for (var myProductModel in productModels) {
+          if (barCode == myProductModel.qrCode) {
+            print('Barcod Map');
+
+            MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                builder: (BuildContext context) => Detail(
+                      productModel: myProductModel,
+                    ));
+            Navigator.of(context).push(materialPageRoute);
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  Future readAlldata() async {
+    Firestore firestore = Firestore.instance;
+    CollectionReference collectionReference = firestore.collection('Product');
+    StreamSubscription<QuerySnapshot> subscription =
+        await collectionReference.snapshots().listen((reponse) {
+      List<DocumentSnapshot> snapshorts = reponse.documents;
+
+      for (var snapshort in snapshorts) {
+        ProductModel productModel = ProductModel(
+            snapshort.data['Name'],
+            snapshort.data['Detail'],
+            snapshort.data['Path'],
+            snapshort.data['QRcode']);
+
+        productModels.add(productModel);
+      }
+    });
   }
 
   Widget listProductMenu() {
@@ -112,7 +150,7 @@ class _MyServiceState extends State<MyService> {
   Widget showLogin() {
     return Text(
       'Login by ... $loginString',
-      style: TextStyle(fontSize: 13.0,color: Colors.white),
+      style: TextStyle(fontSize: 13.0, color: Colors.white),
     );
   }
 
@@ -157,7 +195,8 @@ class _MyServiceState extends State<MyService> {
         style: TextStyle(fontSize: h2),
       ),
       subtitle: Text('For Read QR code by Camera'),
-      trailing: Icon(Icons.navigate_next),onTap: (){
+      trailing: Icon(Icons.navigate_next),
+      onTap: () {
         scanQRcode();
         Navigator.of(context).pop();
       },
