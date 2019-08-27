@@ -50,7 +50,12 @@ class _ListProductState extends State<ListProduct> {
     String detail = productModels[index].detail;
     detail = detail.substring(1, 100);
     detail = '$detail ...';
-    return Text(detail);
+    Color textColor = Colors.black;
+    index % 2 == 0 ? textColor = Colors.black : textColor = Colors.white;
+    return Text(
+      detail,
+      style: TextStyle(color: textColor),
+    );
   }
 
   Widget showName(int index) {
@@ -96,7 +101,8 @@ class _ListProductState extends State<ListProduct> {
         int index,
       ) {
         //return Text(productModels[index].name);
-        return Container(padding: EdgeInsets.all(10.0),
+        return Container(
+          padding: EdgeInsets.all(10.0),
           decoration: index % 2 == 0
               ? BoxDecoration(color: Colors.blue.shade200)
               : BoxDecoration(color: Colors.blue.shade400),
