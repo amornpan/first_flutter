@@ -46,25 +46,32 @@ class _ListProductState extends State<ListProduct> {
     });
   }
 
-  Widget showDetail(int index){
+  Widget showDetail(int index) {
     String detail = productModels[index].detail;
-    detail = detail.substring(1,100);
+    detail = detail.substring(1, 100);
     detail = '$detail ...';
     return Text(detail);
   }
 
   Widget showName(int index) {
-    return Text(
-      productModels[index].name,
-      style: TextStyle(fontSize: 30.0, color: Colors.purple.shade600),
+    return Container(
+      alignment: Alignment.topRight,
+      child: Text(
+        productModels[index].name,
+        style: TextStyle(fontSize: 30.0, color: Colors.purple.shade600),
+      ),
     );
   }
 
   Widget showText(int index) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.5,
+      height: MediaQuery.of(context).size.width * 0.5,
       child: Column(
-        children: <Widget>[showName(index),showDetail(index),],
+        children: <Widget>[
+          showName(index),
+          showDetail(index),
+        ],
       ),
     );
   }
@@ -73,7 +80,7 @@ class _ListProductState extends State<ListProduct> {
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.all(16.0),
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 0.5 - 20.0,
       child: Image.network(
         productModels[index].path,
         fit: BoxFit.contain,
@@ -89,8 +96,16 @@ class _ListProductState extends State<ListProduct> {
         int index,
       ) {
         //return Text(productModels[index].name);
-        return Row(
-          children: <Widget>[showImage(index), showText(index),],
+        return Container(padding: EdgeInsets.all(10.0),
+          decoration: index % 2 == 0
+              ? BoxDecoration(color: Colors.blue.shade200)
+              : BoxDecoration(color: Colors.blue.shade400),
+          child: Row(
+            children: <Widget>[
+              showImage(index),
+              showText(index),
+            ],
+          ),
         );
       },
     );
